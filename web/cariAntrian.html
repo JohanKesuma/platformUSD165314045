@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Cari Antrian</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    </head>
+    <body>
+
+        <!--header-->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1>Cari Antrian</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <form>
+                <div class="form-group">
+                    <label>Tanggal Rawat Jalan : </label>
+                    <input type="text" id="tanggal" class="form-control" name="tanggal" placeholder="yyyymmdd" required>
+                </div>
+
+            </form>
+            <button type="button" onclick="loadAntrian()" class="btn btn-primary">Cari</button>
+
+            <div id="out">
+
+            </div>
+
+            <p id="output">
+
+            </p>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script>
+                function loadAntrian() {
+                    var url = "http://206.189.38.188:8080/myrs/webresources/antrian/cariAntri?tanggal=" + tanggal.value;
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("GET", url, true);
+                    xhttp.send();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+//                        document.getElementById("output").innerHTML = this.responseText;
+                            var obj = JSON.parse(this.responseText);
+
+                            var x = "<table class='table my-4'>";
+                            x += "<thead class='thead-light'>";
+                            x += "<tr>";
+                            x += "<th>Nomor Rekam Medis</th>";
+                            x += "<th>Nama Pasien</th>";
+                            x += "</tr>";
+                            x += "</thead>";
+                            for (var i = 0; i < obj.length; i++) {
+                                x += "<tr>";
+                                x += "<td>" + obj[i].noRm + "</td>";
+                                x += "<td>" + obj[i].nama + "</td>";
+                                x += "</tr>";
+                            }
+                            x += "</table>";
+                            document.getElementById("out").innerHTML = x;
+                        }
+                    }
+
+                }
+        </script>
+    </body>
+</html>
+
+

@@ -1,0 +1,38 @@
+
+.carousel-item {
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+} 
+
+/*.blur{
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+}*/
+
+.contop{
+    padding-top : 20px;
+}
+
+footer{
+    text-align: center;
+}
+
+.icon-img{
+    width: 180px;
+    height: 180px;
+}
+
+.bg-transparent{
+    background-color: rgba(116,203,209,0.5);
+    transition: background-color 400ms linear;
+}
+
+.bg-rs-dark{
+    background-color: #343a40;
+    transition: background-color 400ms linear;
+}
+
